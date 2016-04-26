@@ -7,17 +7,6 @@ DUKPT is specified in ANSI X9.24 part 1.
 
 ## Installation using [Composer](http://getcomposer.org/)
 
-Add this repository into your `composer.json` file:
-
-    "repositories": [
-        {
-          "type": "git",
-          "url": "https://bitbucket.org/tonicforhealth/dukpt.git"
-        }
-    ]
-
-and then run the following command:
-
 ```bash
 $ composer require tonicforhealth/dukpt
 ```
