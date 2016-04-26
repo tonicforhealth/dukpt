@@ -1,0 +1,40 @@
+{
+    "name": "tonicforhealth/dukpt",
+    "description": "Derived unique key per transaction (ANSI X9.24 part 1)",
+    "homepage": "https://github.com/tonicforhealth/dukpt",
+    "license": "MIT",
+    "keywords": ["tonicforhealth", "dukpt"],
+    "authors": [
+        {
+            "name": "Vitalii Ekert",
+            "email": "vitalii.ekert@tonicforhealth.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^5.5|^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "phpunit/php-invoker": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "TonicForHealth\\DUKPT\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TonicForHealth\\DUKPT\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
