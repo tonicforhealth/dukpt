@@ -105,6 +105,7 @@ abstract class AbstractDevice implements DeviceInterface
 
     /**
      * @param DerivedKey $derivedKey
+     *
      * @return string
      */
     abstract protected function createSessionKey(DerivedKey $derivedKey);
