@@ -1,4 +1,9 @@
 # Derived unique key per transaction
+[![License](https://img.shields.io/github/license/tonicforhealth/dukpt.svg?maxAge=2592000)](LICENSE.md)
+[![Build Status](https://travis-ci.org/tonicforhealth/dukpt.svg?branch=master)](https://travis-ci.org/tonicforhealth/dukpt)
+[![Code Coverage](https://scrutinizer-ci.com/g/tonicforhealth/dukpt/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/tonicforhealth/dukpt/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tonicforhealth/dukpt/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tonicforhealth/dukpt/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/32629a10-0651-4aa9-a13a-53182bbc1c19/mini.png)](https://insight.sensiolabs.com/projects/32629a10-0651-4aa9-a13a-53182bbc1c19)
 
 In cryptography, Derived Unique Key Per Transaction (DUKPT) is a key management scheme in which for every transaction,
 a unique key is used which is derived from a fixed key. Therefore, if a derived key is compromised,
