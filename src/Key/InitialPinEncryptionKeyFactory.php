@@ -19,6 +19,7 @@ use TonicForHealth\DUKPT\Helper\Encryption\TripleDESEncryptionHelper;
 class InitialPinEncryptionKeyFactory implements KeyFactoryInterface
 {
     const ENCRYPTION_INIT_KSN_BYTES = 8;
+    const ENCRYPTION_REGISTER_PART_BYTES = 8;
     const ENCRYPTION_LOWER_KEY_MASK = 'C0C0C0C000000000C0C0C0C000000000';
 
     /**
@@ -68,7 +69,10 @@ class InitialPinEncryptionKeyFactory implements KeyFactoryInterface
         $binUpperBytes = $this->encryptionHelper->encrypt($binUpperKey, $binInitKSNUpperBytes);
         $binLowerBytes = $this->encryptionHelper->encrypt($binLowerKey, $binInitKSNUpperBytes);
 
-        $binKey = $binUpperBytes.$binLowerBytes;
+        $leftRegister = substr($binUpperBytes, 0, self::ENCRYPTION_REGISTER_PART_BYTES);
+        $rightRegister = substr($binLowerBytes, 0, self::ENCRYPTION_REGISTER_PART_BYTES);
+
+        $binKey = $leftRegister.$rightRegister;
 
         return new InitialPinEncryptionKey($binKey);
     }

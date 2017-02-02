@@ -51,16 +51,8 @@ class TripleDESEncryptionHelper extends AbstractEncryptionHelper
     /**
      * {@inheritdoc}
      */
-    protected function getCipher()
+    protected function getCipherMethod()
     {
-        return MCRYPT_3DES;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getMode()
-    {
-        return MCRYPT_MODE_CBC;
+        return 'des-ede3-cbc';
     }
 }
