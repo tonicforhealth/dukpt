@@ -23,7 +23,7 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      */
     public function encrypt($key, $data)
     {
-        return mcrypt_encrypt($this->getCipher(), $key, $data, $this->getMode(), $this->getIV());
+        return openssl_encrypt($data, $this->getCipherMethod(), $key, OPENSSL_RAW_DATA, $this->getIV());
     }
 
     /**
@@ -31,7 +31,7 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      */
     public function decrypt($key, $data)
     {
-        return rtrim(mcrypt_decrypt($this->getCipher(), $key, $data, $this->getMode(), $this->getIV()), self::NULL_CHAR);
+        return rtrim(openssl_decrypt($data, $this->getCipherMethod(), $key, OPENSSL_RAW_DATA, $this->getIV()));
     }
 
     /**
@@ -41,20 +41,14 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      */
     protected function getIV()
     {
-        return str_repeat(self::NULL_CHAR, mcrypt_get_iv_size($this->getCipher(), $this->getMode()));
+        return str_repeat(self::NULL_CHAR, openssl_cipher_iv_length($this->getCipherMethod()));
     }
 
     /**
-     * Returns one of the MCRYPT_ciphername constants of the name of the algorithm as string.
+     * Returns one of the available cipher methods
+     * @see openssl_get_cipher_methods()
      *
      * @return string
      */
-    abstract protected function getCipher();
-
-    /**
-     * Returns one of the MCRYPT_MODE_modename constants of one of "ecb", "cbc", "cfb", "ofb", "nofb" or "stream".
-     *
-     * @return string
-     */
-    abstract protected function getMode();
+    abstract protected function getCipherMethod();
 }

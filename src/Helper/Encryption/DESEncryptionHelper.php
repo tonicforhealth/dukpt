@@ -19,16 +19,8 @@ class DESEncryptionHelper extends AbstractEncryptionHelper
     /**
      * {@inheritdoc}
      */
-    protected function getCipher()
+    protected function getCipherMethod()
     {
-        return MCRYPT_DES;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getMode()
-    {
-        return MCRYPT_MODE_CBC;
+        return 'des-cbc';
     }
 }
