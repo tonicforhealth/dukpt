@@ -25,7 +25,7 @@ interface EncryptionHelperInterface
      *
      * @return string The encrypted data as a string or FALSE on failure.
      *
-     * @see mcrypt_encrypt
+     * @see openssl_encrypt
      */
     public function encrypt($key, $data);
 
@@ -38,7 +38,7 @@ interface EncryptionHelperInterface
      *
      * @return string The decrypted data as a string or FALSE on failure.
      *
-     * @see mcrypt_decrypt
+     * @see openssl_decrypt
      */
     public function decrypt($key, $data);
 }
