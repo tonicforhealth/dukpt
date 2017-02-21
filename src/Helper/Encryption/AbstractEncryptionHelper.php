@@ -31,7 +31,7 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      */
     public function decrypt($key, $data)
     {
-        return rtrim(openssl_decrypt($data, $this->getCipherMethod(), $key, OPENSSL_RAW_DATA, $this->getIV()));
+        return rtrim(openssl_decrypt($data, $this->getCipherMethod(), $key, $this->getEncodingStringSettings(), $this->getIV()), "\0");
     }
 
     /**
@@ -51,4 +51,11 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      * @return string
      */
     abstract protected function getCipherMethod();
+
+    /**
+     * @see openssl_decrypt() and openssl_encrypt() parammeters
+     *
+     * @return int
+     */
+    abstract protected function getEncodingStringSettings();
 }
