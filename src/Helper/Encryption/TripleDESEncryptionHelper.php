@@ -32,7 +32,7 @@ class TripleDESEncryptionHelper extends AbstractEncryptionHelper
      */
     public function decrypt($key, $data)
     {
-        return $this->sanitizeNonPrintableCharacters(parent::decrypt($this->padKey($key), $data));
+        return parent::decrypt($this->padKey($key), $data);
     }
 
     /**
@@ -42,23 +42,7 @@ class TripleDESEncryptionHelper extends AbstractEncryptionHelper
      */
     protected function padKey($key)
     {
-        if (static::ENCRYPTION_KEY_SIZE_BYTES > strlen($key)) {
-            $key = str_pad($key, static::ENCRYPTION_KEY_SIZE_BYTES, $key);
-        }
-
-        return $key;
-    }
-
-    /**
-     * Remove all non printable characters in a string (for UTF-8)
-     *
-     * @param string $string
-     *
-     * @return mixed
-     */
-    protected function sanitizeNonPrintableCharacters($string)
-    {
-        return preg_replace('/[\x00-\x1F\x7F\xA0]/u', '', $string);
+        return str_pad($key, self::ENCRYPTION_KEY_SIZE_BYTES, $key);
     }
 
     /**
@@ -67,13 +51,5 @@ class TripleDESEncryptionHelper extends AbstractEncryptionHelper
     protected function getCipherMethod()
     {
         return 'des-ede3-cbc';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getEncodingOptions()
-    {
-        return OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING;
     }
 }

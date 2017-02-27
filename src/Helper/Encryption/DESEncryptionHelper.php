@@ -23,12 +23,4 @@ class DESEncryptionHelper extends AbstractEncryptionHelper
     {
         return 'des-cbc';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getEncodingOptions()
-    {
-        return OPENSSL_RAW_DATA;
-    }
 }
