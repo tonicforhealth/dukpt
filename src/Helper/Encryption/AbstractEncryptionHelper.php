@@ -53,7 +53,7 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
     abstract protected function getCipherMethod();
 
     /**
-     * @see openssl_decrypt() and openssl_encrypt() parammeters
+     * @see openssl_decrypt() and openssl_encrypt() parameters
      *
      * @return int
      */
