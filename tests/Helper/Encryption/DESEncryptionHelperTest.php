@@ -24,7 +24,7 @@ class DESEncryptionHelperTest extends AbstractEncryptionHelperTest
     public function providerEncrypt()
     {
         return [
-            ['0123456789ABCDEF', 'TEST/TESTCARD', '7E2B8636A1A029A0120C786EDAA9F6D6'],
+            ['0123456789ABCDEF', 'TEST/TESTCARD', '7E2B8636A1A029A0204B839D29CF8E38'],
         ];
     }
 
@@ -34,7 +34,7 @@ class DESEncryptionHelperTest extends AbstractEncryptionHelperTest
     public function providerDecrypt()
     {
         return [
-            ['0123456789ABCDEF', '7E2B8636A1A029A0120C786EDAA9F6D6', 'TEST/TESTCARD'],
+            ['0123456789ABCDEF', '7E2B8636A1A029A0204B839D29CF8E38', 'TEST/TESTCARD'],
         ];
     }
 
