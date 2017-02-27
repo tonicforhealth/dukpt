@@ -72,7 +72,7 @@ class TripleDESEncryptionHelper extends AbstractEncryptionHelper
     /**
      * {@inheritdoc}
      */
-    protected function getEncodingStringSettings()
+    protected function getEncodingOptions()
     {
         return OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING;
     }

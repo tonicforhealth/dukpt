@@ -27,7 +27,7 @@ class DESEncryptionHelper extends AbstractEncryptionHelper
     /**
      * {@inheritdoc}
      */
-    protected function getEncodingStringSettings()
+    protected function getEncodingOptions()
     {
         return OPENSSL_RAW_DATA;
     }
