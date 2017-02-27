@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
+
 namespace TonicForHealth\DUKPT\Helper\Encryption;
 
 /**
@@ -41,26 +42,14 @@ class TripleDESEncryptionHelper extends AbstractEncryptionHelper
      */
     protected function padKey($key)
     {
-        if (static::ENCRYPTION_KEY_SIZE_BYTES > strlen($key)) {
-            $key = str_pad($key, static::ENCRYPTION_KEY_SIZE_BYTES, $key);
-        }
-
-        return $key;
+        return str_pad($key, self::ENCRYPTION_KEY_SIZE_BYTES, $key);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getCipher()
+    protected function getCipherMethod()
     {
-        return MCRYPT_3DES;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getMode()
-    {
-        return MCRYPT_MODE_CBC;
+        return 'des-ede3-cbc';
     }
 }
