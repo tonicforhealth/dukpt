@@ -16,6 +16,7 @@ namespace TonicForHealth\DUKPT\Helper\Encryption;
  */
 abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
 {
+    const BLOCK_SIZE_BYTES = 8;
     const NULL_CHAR = "\0";
 
     /**
@@ -23,7 +24,7 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      */
     public function encrypt($key, $data)
     {
-        return mcrypt_encrypt($this->getCipher(), $key, $data, $this->getMode(), $this->getIV());
+        return openssl_encrypt($this->getPaddedData($data), $this->getCipherMethod(), $key, $this->getOptions(), $this->getIV());
     }
 
     /**
@@ -31,7 +32,37 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      */
     public function decrypt($key, $data)
     {
-        return rtrim(mcrypt_decrypt($this->getCipher(), $key, $data, $this->getMode(), $this->getIV()), self::NULL_CHAR);
+        return rtrim(openssl_decrypt($data, $this->getCipherMethod(), $key, $this->getOptions(), $this->getIV()), self::NULL_CHAR);
+    }
+
+    /**
+     * Returns one of the available cipher methods
+     *
+     * @see openssl_get_cipher_methods()
+     *
+     * @return string
+     */
+    abstract protected function getCipherMethod();
+
+    /**
+     * @param string $data
+     *
+     * @return string
+     */
+    private function getPaddedData($data)
+    {
+        $length = strlen($data);
+        $offset = $length % self::BLOCK_SIZE_BYTES;
+
+        return (0 === $offset) ? $data : str_pad($data, $length + self::BLOCK_SIZE_BYTES - $offset, self::NULL_CHAR);
+    }
+
+    /**
+     * @return int
+     */
+    private function getOptions()
+    {
+        return OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING;
     }
 
     /**
@@ -39,22 +70,8 @@ abstract class AbstractEncryptionHelper implements EncryptionHelperInterface
      *
      * @return string
      */
-    protected function getIV()
+    private function getIV()
     {
-        return str_repeat(self::NULL_CHAR, mcrypt_get_iv_size($this->getCipher(), $this->getMode()));
+        return str_repeat(self::NULL_CHAR, openssl_cipher_iv_length($this->getCipherMethod()));
     }
-
-    /**
-     * Returns one of the MCRYPT_ciphername constants of the name of the algorithm as string.
-     *
-     * @return string
-     */
-    abstract protected function getCipher();
-
-    /**
-     * Returns one of the MCRYPT_MODE_modename constants of one of "ecb", "cbc", "cfb", "ofb", "nofb" or "stream".
-     *
-     * @return string
-     */
-    abstract protected function getMode();
 }
