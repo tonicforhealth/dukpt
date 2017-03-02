@@ -19,6 +19,7 @@ matrix:
       env: COVERAGE=yes
     - php: nightly
     - php: hhvm
+      env: true
   allow_failures:
     - php: nightly
     - php: hhvm
