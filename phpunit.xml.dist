@@ -21,7 +21,6 @@
         beStrictAboutTestSize="true"
         beStrictAboutTodoAnnotatedTests="true"
         beStrictAboutChangesToGlobalState="true"
-        checkForUnintentionallyCoveredCode="false"
         timeoutForSmallTests="1"
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
