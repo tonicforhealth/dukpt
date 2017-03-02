@@ -17,7 +17,7 @@ matrix:
   include:
     - php: 7.0
       env: COVERAGE=yes
-    - nightly
+    - nightly:
       env: COMPOSER_DEPENDENCIES=highest
     - php: hhvm
   allow_failures:
