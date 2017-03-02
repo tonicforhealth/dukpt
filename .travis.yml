@@ -10,8 +10,8 @@ env:
   global:
     - COMPOSER_NO_INTERACTION=1
   matrix:
-    - DEPENDENCIES=lowest
-    - DEPENDENCIES=highest
+    - COMPOSER_DEPENDENCIES=lowest
+    - COMPOSER_DEPENDENCIES=highest
 
 matrix:
   include:
@@ -33,9 +33,9 @@ before_install:
   - composer self-update
 
 install:
-  - if [ -z $DEPENDENCIES ]; then composer install; fi;
-  - if [ $DEPENDENCIES = lowest ]; then composer update --prefer-lowest; fi;
-  - if [ $DEPENDENCIES = highest ]; then composer update; fi;
+  - if [ -z $COMPOSER_DEPENDENCIES ]; then composer install; fi;
+  - if [ $COMPOSER_DEPENDENCIES = lowest ]; then composer update --prefer-lowest; fi;
+  - if [ $COMPOSER_DEPENDENCIES = highest ]; then composer update; fi;
 
 script:
   - if [[ $COVERAGE = yes ]]; then bin/phpunit --verbose; else bin/phpunit --verbose --no-coverage; fi
