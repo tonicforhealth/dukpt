@@ -5,6 +5,8 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - nightly
+  - hhvm
 
 env:
   global:
@@ -14,13 +16,6 @@ env:
     - COMPOSER_DEPENDENCIES=highest
 
 matrix:
-  include:
-    - php: 7.0
-      env: COVERAGE=yes
-    - php: nightly
-      env: COMPOSER_DEPENDENCIES=highest
-    - php: hhvm
-      env:
   allow_failures:
     - php: nightly
     - php: hhvm
@@ -31,12 +26,13 @@ cache:
     - $HOME/.composer/cache/files
 
 before_install:
-  - if [[ $TRAVIS_PHP_VERSION != nightly && $TRAVIS_PHP_VERSION != hhvm && $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini; fi;
+  - if [[ $TRAVIS_PHP_VERSION = 7.0 && $COMPOSER_DEPENDENCIES = highest ]]; then COVERAGE=yes; fi;
+  - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini; fi;
   - composer self-update
 
 install:
-  - if [ $COMPOSER_DEPENDENCIES = lowest ]; then composer update --prefer-lowest; fi;
-  - if [ $COMPOSER_DEPENDENCIES = highest ]; then composer update; fi;
+  - if [[ $COMPOSER_DEPENDENCIES = lowest ]]; then composer update --prefer-lowest; fi;
+  - if [[ $COMPOSER_DEPENDENCIES = highest ]]; then composer update; fi;
 
 script:
   - if [[ $COVERAGE = yes ]]; then bin/phpunit --coverage-clover=build/coverage.xml; else bin/phpunit; fi
