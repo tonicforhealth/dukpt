@@ -27,7 +27,7 @@ cache:
 
 before_install:
   - if [[ $TRAVIS_PHP_VERSION = 7.0 && $COMPOSER_DEPENDENCIES = highest ]]; then COVERAGE=yes; fi;
-  - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini; fi;
+  - if [[ $TRAVIS_PHP_VERSION != nightly && $TRAVIS_PHP_VERSION != hhvm && $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini; fi;
   - composer self-update
 
 install:
