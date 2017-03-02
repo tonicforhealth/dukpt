@@ -1,13 +1,18 @@
 language: php
 
-cache:
-  directories:
-    - $HOME/.composer/cache/files
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+
+env:
+  matrix:
+    - DEPENDENCIES=lowest
+    - DEPENDENCIES=highest
 
 matrix:
   include:
-    - php: 5.5
-    - php: 5.6
     - php: 7.0
       env: COVERAGE=yes
     - php: nightly
@@ -17,12 +22,18 @@ matrix:
     - php: hhvm
   fast_finish: true
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 before_install:
   - if [[ $TRAVIS_PHP_VERSION != hhvm && $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini; fi;
   - composer self-update
 
 install:
-  - composer install --prefer-dist --no-interaction
+  - if [ -z $DEPENDENCIES ]; then composer install -n; fi;
+  - if [ $DEPENDENCIES = lowest ]; then composer update --prefer-lowest -n; fi;
+  - if [ $DEPENDENCIES = highest ]; then composer update -n; fi;
 
 script:
   - if [[ $COVERAGE = yes ]]; then bin/phpunit --verbose; else bin/phpunit --verbose --no-coverage; fi
