@@ -21,7 +21,6 @@
         beStrictAboutTestSize="true"
         beStrictAboutTodoAnnotatedTests="true"
         beStrictAboutChangesToGlobalState="true"
-        checkForUnintentionallyCoveredCode="false"
         timeoutForSmallTests="1"
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
@@ -38,10 +37,5 @@
             <directory suffix=".php">./src/</directory>
         </whitelist>
     </filter>
-
-    <logging>
-        <log type="coverage-html" target="build/coverage/"/>
-        <log type="coverage-clover" target="build/coverage.xml"/>
-    </logging>
 
 </phpunit>
