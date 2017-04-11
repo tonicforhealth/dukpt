@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * This file is part of the DUKPT package.
  *
  * Copyright (c) 2016-2017 Tonic Health <info@tonicforhealth.com>
