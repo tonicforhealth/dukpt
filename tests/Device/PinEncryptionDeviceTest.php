@@ -48,4 +48,18 @@ class PinEncryptionDeviceTest extends \PHPUnit_Framework_TestCase
 
         static::assertEquals($plainText, $device->decrypt($cipherText));
     }
+
+    /**
+     * @test
+     * @depends shouldLoad
+     *
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Hexadecimal input string must have an even length.
+     *
+     * @param PinEncryptionDevice $device
+     */
+    public function shouldThrowInvalidArgumentException(PinEncryptionDevice $device)
+    {
+        $device->decrypt('F');
+    }
 }

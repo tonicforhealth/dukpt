@@ -96,6 +96,10 @@ abstract class AbstractDevice implements DeviceInterface
      */
     public function decrypt($cipherText)
     {
+        if (!$this->hasEvenLength($cipherText)) {
+            throw new \InvalidArgumentException('Hexadecimal input string must have an even length.');
+        }
+
         return $this->encryptionHelper->decrypt($this->sessionKey, hex2bin($cipherText));
     }
 
@@ -110,4 +114,16 @@ abstract class AbstractDevice implements DeviceInterface
      * @return string
      */
     abstract protected function createSessionKey(DerivedKey $derivedKey);
+
+    /**
+     * Returns TRUE if the string has an even length.
+     *
+     * @param string $string
+     *
+     * @return bool
+     */
+    private function hasEvenLength($string)
+    {
+        return 0 === strlen($string) %2;
+    }
 }

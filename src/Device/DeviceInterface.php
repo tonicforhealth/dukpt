@@ -52,7 +52,7 @@ interface DeviceInterface
      *
      * @return string
      *
-     * @see load
+     * @throws \InvalidArgumentException If the provided ciphertext has a wrong size
      */
     public function decrypt($cipherText);
 }
