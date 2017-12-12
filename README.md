@@ -1,5 +1,5 @@
 # Derived unique key per transaction
-[![License](https://img.shields.io/github/license/tonicforhealth/dukpt.svg?maxAge=2592000)](LICENSE.md)
+[![License](https://img.shields.io/github/license/tonicforhealth/dukpt.svg?maxAge=2592000)](LICENSE)
 [![Packagist](https://img.shields.io/packagist/v/tonicforhealth/dukpt.svg?maxAge=2592000)](https://packagist.org/packages/tonicforhealth/dukpt)
 [![Build Status](https://travis-ci.org/tonicforhealth/dukpt.svg?branch=master)](https://travis-ci.org/tonicforhealth/dukpt)
 [![Code Coverage](https://scrutinizer-ci.com/g/tonicforhealth/dukpt/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/tonicforhealth/dukpt/?branch=master)

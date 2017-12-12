@@ -1,12 +1,13 @@
 <?php
-/**
+/*
  * This file is part of the DUKPT package.
  *
- * Copyright (c) 2016 Tonic Health <info@tonicforhealth.com>
+ * Copyright (c) 2016-2017 Tonic Health <info@tonicforhealth.com>
  *
- * For the full copyright and license information, please view the LICENSE.md
+ * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace TonicForHealth\DUKPT\Device;
 
 use TonicForHealth\DUKPT\DUKPTFactory;
@@ -95,6 +96,10 @@ abstract class AbstractDevice implements DeviceInterface
      */
     public function decrypt($cipherText)
     {
+        if (!$this->hasEvenLength($cipherText)) {
+            throw new \InvalidArgumentException('Hexadecimal input string must have an even length.');
+        }
+
         return $this->encryptionHelper->decrypt($this->sessionKey, hex2bin($cipherText));
     }
 
@@ -109,4 +114,16 @@ abstract class AbstractDevice implements DeviceInterface
      * @return string
      */
     abstract protected function createSessionKey(DerivedKey $derivedKey);
+
+    /**
+     * Returns TRUE if the string has an even length.
+     *
+     * @param string $string
+     *
+     * @return bool
+     */
+    private function hasEvenLength($string)
+    {
+        return 0 === strlen($string) %2;
+    }
 }

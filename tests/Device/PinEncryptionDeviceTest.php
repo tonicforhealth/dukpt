@@ -1,12 +1,13 @@
 <?php
-/**
+/*
  * This file is part of the DUKPT package.
  *
- * Copyright (c) 2016 Tonic Health <info@tonicforhealth.com>
+ * Copyright (c) 2016-2017 Tonic Health <info@tonicforhealth.com>
  *
- * For the full copyright and license information, please view the LICENSE.md
+ * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace TonicForHealth\DUKPT\Tests\Device;
 
 use TonicForHealth\DUKPT\Device\PinEncryptionDevice;
@@ -46,5 +47,19 @@ class PinEncryptionDeviceTest extends \PHPUnit_Framework_TestCase
         $cipherText = '160954FE1071D30C5CF260C5AC48EB5FBEFE37B32033E3B7EF693F8C6AB1BBD6276446FB3689728B926D923CD9ECCD522B6DE5850FD9AB2D7976D943C12CDC947E023098CAAE4F6D';
 
         static::assertEquals($plainText, $device->decrypt($cipherText));
+    }
+
+    /**
+     * @test
+     * @depends shouldLoad
+     *
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Hexadecimal input string must have an even length.
+     *
+     * @param PinEncryptionDevice $device
+     */
+    public function shouldThrowInvalidArgumentException(PinEncryptionDevice $device)
+    {
+        $device->decrypt('F');
     }
 }
